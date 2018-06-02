@@ -134,7 +134,7 @@ shinyServer(function(input, output, session) {
     })
     
     output$uri_gif <- renderText({
-        img(src='user_uri.gif')
+        HTML('<img src="user_uri.gif">')
     })
     
     playlist_tracks <- eventReactive(input$playlist_go, {
