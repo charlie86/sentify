@@ -12,8 +12,12 @@ library(htmltools)
 library(lubridate)
 library(lazyeval)
 library(spotifyr)
+library(future)
+library(promises)
 
 rm(list = ls())
+
+plan(multiprocess)
 
 source('helpers.R')
 
