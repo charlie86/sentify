@@ -41,25 +41,17 @@ shinyServer(function(input, output, session) {
     })
     
     artist_audio_features <- eventReactive(input$tracks_go, {
-        artist_name <- input$select_artist
-        access_token <- spotify_access_token()
-        artist_info <- artist_info()
-        future({
-            get_artist_audio_features(artist_uri = artist_info$artist_uri[artist_info$artist_name == artist_name], use_artist_uri = T, access_token = access_token)
-        })
-        
-        # if (nrow(df) == 0) {
-        #     stop("Sorry, couldn't find any tracks for that artist's albums on Spotify.")
-        # }
-        # return(df)
+        df <- get_artist_audio_features(artist_uri = artist_info()$artist_uri[artist_info()$artist_name == input$select_artist], use_artist_uri = T, access_token = spotify_access_token())
+        if (nrow(df) == 0) {
+            stop("Sorry, couldn't find any tracks for that artist's albums on Spotify.")
+        }
+        return(df)
     })
     
     output$artist_quadrant_chart <- renderHighchart({
-        artist_audio_features() %...>% (function(result) {
-            result %>% 
-                artist_quadrant_chart() %>% 
-                hc_add_event_point(event = 'mouseOver')
-        }) 
+        artist_audio_features() %>% 
+            artist_quadrant_chart() %>% 
+            hc_add_event_point(event = 'mouseOver')
     })
     
     output$artist_chart_song_ui <- renderUI({
@@ -70,15 +62,11 @@ shinyServer(function(input, output, session) {
         req(active_tab == 'artist_tab', input$artist_quadrant_chart_mouseOver, input$artist_autoplay == TRUE)
         
         artist_track_hover <- input$artist_quadrant_chart_mouseOver
-        track_preview_url <- artist_audio_features() %...>% (function(result) {
-            
-         result %>% 
-            filter(
+        track_preview_url <- artist_audio_features() %>% filter(
             album_name == artist_track_hover$series,
             valence == artist_track_hover$x,
             energy == artist_track_hover$y
         ) %>% pull(track_preview_url)
-        })
         
         if (!is.na(track_preview_url)) {
             tagList(
