@@ -14,8 +14,7 @@ function(request) {
                   material_side_nav(
                       material_side_nav_tabs(
                           side_nav_tabs = c('Artists' = 'artist_tab',
-                                            'User Playlists' = 'playlist_tab',
-                                            'Code' = 'code_tab'),
+                                            'User Playlists' = 'playlist_tab'),
                           color = '#1ed760'
                       )
                   ),
@@ -43,7 +42,7 @@ function(request) {
                                                     material_column(
                                                         width = 3,
                                                         material_card(
-                                                            material_text_box('uri', 'Enter a User\'s Spotify URI'),
+                                                            material_text_box('uri', 'Enter a User\'s Spotify URI', color = 'black'),
                                                             withBusyIndicatorUI(
                                                                 actionButton('user_go', 'Search for user', class = 'btn-primary')
                                                             ),
@@ -64,7 +63,6 @@ function(request) {
                                                             uiOutput('playlist_plot')
                                                     )
                                                 )
-                  ),
-                  material_side_nav_tab_content('code_tab')
+                  )
     )
 }
