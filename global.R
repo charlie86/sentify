@@ -43,7 +43,4 @@ neon_colors <- c(
     , '#A0E6FF'
 )
 
-Sys.setenv("SPOTIFY_CLIENT_ID" = '0cfbcde7a276401c891d1ba876c1ebb7',
-           'SPOTIFY_CLIENT_SECRET' = '0ec75230197f4a858617392591e856c2')
-
 pca_vars <- c('danceability', 'energy', 'loudness', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo', 'duration_ms')
