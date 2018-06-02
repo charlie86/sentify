@@ -44,9 +44,9 @@ function(request) {
                                                         width = 3,
                                                         material_card(
                                                             material_text_box('uri', 'Enter a User\'s Spotify URI'),
-                                                            # withBusyIndicatorUI(
-                                                                actionButton('user_go', 'Search for user', class = 'btn-primary'),
-                                                            # ),
+                                                            withBusyIndicatorUI(
+                                                                actionButton('user_go', 'Search for user', class = 'btn-primary')
+                                                            ),
                                                             htmlOutput('user'),
                                                             uiOutput('select_playlist_ui'),
                                                             br(),

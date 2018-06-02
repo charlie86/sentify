@@ -1,6 +1,6 @@
 library(httr)
 library(shiny)
-# library(shinyjs)
+library(shinyjs)
 library(shinyBS)
 library(tidyverse)
 library(shinymaterial)
