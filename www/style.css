@@ -1,0 +1,34 @@
+.btn, .btn:active, .btn:focus {
+	background-color: #2ebd59 !important; 
+	border-color: #2ebd59 !important;
+	color: #fff !important;
+}
+
+.btn:hover {
+	background-color: #1ed760 !important;
+	border-color: #1ed760 !important;
+	color: #fff;
+}
+
+#slide-out {
+    background-color: #828282;
+}
+
+.rect.highcharts-background {
+	fill: #000;
+}
+
+.card-content {
+	background-color: #ecebe8;
+	border-color: #ecebe8;
+	color: #000;
+}
+
+html {
+	background-color: #828282;
+}
+
+#uri_gif>img {
+	margin: auto;
+	width: 100%;
+}
