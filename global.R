@@ -1,6 +1,6 @@
 library(httr)
 library(shiny)
-library(shinyjs)
+# library(shinyjs)
 library(shinyBS)
 library(tidyverse)
 library(shinymaterial)
@@ -16,8 +16,6 @@ library(spotifyr)
 rm(list = ls())
 
 source('helpers.R')
-
-enableBookmarking(store = "url")
 
 jscode <-
     '$(document).on("shiny:connected", function(e) {

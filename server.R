@@ -19,9 +19,9 @@ shinyServer(function(input, output, session) {
         req(nrow(artist_info()) > 0)
         tagList(
             htmlOutput('artist_img'),
-            withBusyIndicatorUI(
-                actionButton('tracks_go', 'Generate plot', class = 'btn-primary')
-            ),
+            # withBusyIndicatorUI(
+                actionButton('tracks_go', 'Generate plot', class = 'btn-primary'),
+            # ),
             material_switch('artist_autoplay', 'Play song preview on hover', color = '#1ed760'),
             br(),
             uiOutput('artist_chart_song_ui')
@@ -42,7 +42,7 @@ shinyServer(function(input, output, session) {
 
     observeEvent(input$tracks_go, {
         
-        withBusyIndicatorServer('tracks_go', {
+        # withBusyIndicatorServer('tracks_go', {
             
             track_info <- get_artist_audio_features(artist_uri = artist_info()$artist_uri[artist_info()$artist_name == input$select_artist], use_artist_uri = T, access_token = spotify_access_token())
             
@@ -86,7 +86,7 @@ shinyServer(function(input, output, session) {
                     withSpinner(highchartOutput('artist_quadrant_chart'), type = 5, color = '#1ed760')
                 }
             })
-        })
+        # })
     })
     
     playlists <- reactive({
@@ -94,7 +94,7 @@ shinyServer(function(input, output, session) {
     })
 
     observeEvent(input$user_go, {
-        withBusyIndicatorServer('user_go', {
+        # withBusyIndicatorServer('user_go', {
             
             if (nchar(input$uri) == 0) {
                 stop('Type a user name or Spotify URI')
@@ -116,9 +116,9 @@ shinyServer(function(input, output, session) {
             
                 output$select_playlist_ui <- renderUI({
                     tagList(
-                        withBusyIndicatorUI(
-                            actionButton('playlist_go', 'Find playlists', class = 'btn-primary')
-                        ),
+                        # withBusyIndicatorUI(
+                            actionButton('playlist_go', 'Find playlists', class = 'btn-primary'),
+                        # ),
                         material_switch('playlist_autoplay', 'Play song preview on hover', color = '#1ed760'),
                         br(),
                         uiOutput('playlist_chart_song_ui')
@@ -128,7 +128,7 @@ shinyServer(function(input, output, session) {
             } else {
                 stop("Sorry, couldn't find that user on Spotify.")
             }
-        })
+        # })
     })
 
     output$uri_gif <- renderText({
@@ -136,7 +136,7 @@ shinyServer(function(input, output, session) {
     })
 
     observeEvent(input$playlist_go, {
-        withBusyIndicatorServer('playlist_go', {
+        # withBusyIndicatorServer('playlist_go', {
         
             playlist_tracks <- get_playlist_tracks(playlists(), access_token = spotify_access_token())
             
@@ -187,7 +187,7 @@ shinyServer(function(input, output, session) {
                 }
             })
             
-        })
+        # })
     })
 
 })

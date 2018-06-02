@@ -5,9 +5,9 @@ function(request) {
                   background_color = '#828282',
                   tags$head(tags$link(rel = 'icon', type = 'image/png', href = 'green_music_note.png'),
                             tags$title('Sentify')),
-                  useShinyjs(),
+                  # useShinyjs(),
                   tags$script(jscode),
-                  tags$style(appCSS),
+                  # tags$style(appCSS),
                   tags$head(tags$link(rel = 'stylesheet', type = 'text/css', href = 'style.css'),
                             tags$head(includeScript('www/ga.js')),
                             tags$head(includeScript('www/hotjar.js'))),
@@ -44,9 +44,9 @@ function(request) {
                                                         width = 3,
                                                         material_card(
                                                             material_text_box('uri', 'Enter a User\'s Spotify URI'),
-                                                            withBusyIndicatorUI(
-                                                                actionButton('user_go', 'Search for user', class = 'btn-primary')
-                                                            ),
+                                                            # withBusyIndicatorUI(
+                                                                actionButton('user_go', 'Search for user', class = 'btn-primary'),
+                                                            # ),
                                                             htmlOutput('user'),
                                                             uiOutput('select_playlist_ui'),
                                                             br(),
