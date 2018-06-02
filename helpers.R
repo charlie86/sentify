@@ -100,7 +100,7 @@ album_feature_chart <- function(df, feature) {
 ############ playlists
 playlist_quadrant_chart <- function(track_df) {
     
-    df2 <- data.frame(x = c(0, 1, 0, 1),
+    df2 <- data.frame(x = c(0, .9, 0, .9),
                       y = c(1, 1, 0, 0),
                       text = c('Turbulent/Angry',
                                'Happy/Joyful',
@@ -169,7 +169,7 @@ profile_bar_chart <- function(track_df, group_var_str) {
 
 artist_quadrant_chart <- function(track_df) {
     
-    df2 <- data.frame(x = c(0, 1, 0, 1),
+    df2 <- data.frame(x = c(0, .9, 0, .9),
                       y = c(1, 1, 0, 0),
                       text = c('Turbulent/Angry',
                                'Happy/Joyful',

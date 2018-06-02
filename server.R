@@ -81,7 +81,7 @@ shinyServer(function(input, output, session) {
 
             output$artist_plot <- renderUI({
                 if (input$GetScreenWidth >= 800) {
-                    withSpinner(highchartOutput('artist_quadrant_chart', width = '820px', height = '700px'), type = 5, color = '#1ed760')
+                    withSpinner(highchartOutput('artist_quadrant_chart', width = '820px', height = '800px'), type = 5, color = '#1ed760')
                 } else {
                     withSpinner(highchartOutput('artist_quadrant_chart'), type = 5, color = '#1ed760')
                 }
@@ -181,7 +181,7 @@ shinyServer(function(input, output, session) {
             
             output$playlist_plot <- renderUI({
                 if (input$GetScreenWidth >= 800) {
-                    withSpinner(highchartOutput('playlist_quadrant_chart', width = '820px', height = '700px'), type = 5, color = '#1ed760')
+                    withSpinner(highchartOutput('playlist_quadrant_chart', width = '820px', height = '800px'), type = 5, color = '#1ed760')
                 } else {
                     withSpinner(highchartOutput('playlist_quadrant_chart'), type = 5, color = '#1ed760')
                 }
