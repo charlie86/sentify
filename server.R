@@ -49,8 +49,7 @@ shinyServer(function(input, output, session) {
     })
     
     output$artist_quadrant_chart <- renderHighchart({
-        artist_audio_features() %>% 
-            artist_quadrant_chart() %>% 
+        artist_quadrant_chart(artist_audio_features()) %>% 
             hc_add_event_point(event = 'mouseOver')
     })
     
