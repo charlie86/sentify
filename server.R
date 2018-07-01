@@ -41,7 +41,7 @@ shinyServer(function(input, output, session) {
     })
     
     artist_audio_features <- eventReactive(input$tracks_go, {
-        df <- get_artist_audio_features(artist_uri = artist_info()$artist_uri[artist_info()$artist_name == input$select_artist], use_artist_uri = T, access_token = spotify_access_token())
+        df <- get_artist_audio_features(artist_info()$artist_uri[artist_info()$artist_name == input$select_artist], access_token = spotify_access_token(), parallelize = TRUE)
         if (nrow(df) == 0) {
             stop("Sorry, couldn't find any tracks for that artist's albums on Spotify.")
         }
