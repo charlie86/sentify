@@ -79,7 +79,7 @@ album_feature_chart <- function(df, feature) {
                       }), collapse = ','), '};'
     )
     
-    album_chart <- hchart(dep_df, x = album_rank, y = feature_var, group = album_name, type = 'scatter') %>% 
+    album_chart <- hchart(dep_df, x = 'album_rank', y = 'feature_var', group = 'album_name', type = 'scatter') %>% 
         hc_add_series_df(data = avg_line, type = 'line') %>%
         hc_tooltip(formatter = JS(paste0("function() {return this.point.tooltip;}")), useHTML = T) %>% 
         hc_colors(c(rep('#d35400', n_distinct(df$album_name)), 'black')) %>% 
@@ -118,7 +118,7 @@ playlist_quadrant_chart <- function(track_df) {
                                 '<br><b>Valence:</b> ', valence,
                                 '<br><b>Energy:</b> ', energy)) %>% 
         ungroup %>% 
-        hchart(hcaes(x = valence, y = energy, group = playlist_name), type = 'scatter') %>% 
+        hchart(hcaes(x = 'valence', y = 'energy', group = 'playlist_name'), type = 'scatter') %>% 
         hc_tooltip(formatter = JS(paste0("function() {return this.point.tooltip;}")), useHTML = T) %>%
         hc_xAxis(max = 1, min = 0, title = list(text = 'Valence')) %>%
         hc_yAxis(max = 1, min = 0, title = list(text = 'Energy')) %>%
@@ -159,7 +159,7 @@ profile_bar_chart <- function(track_df, group_var_str) {
         arrange(-`(energy+valence)/2`) %>% 
         gather(metric, value, valence:`(energy+valence)/2`) %>% 
         mutate(value = round(value, 4)) %>% 
-        hchart(hcaes(x = group_var, y = value, group = metric), type = 'bar') %>% 
+        hchart(hcaes(x = 'group_var', y = 'value', group = 'metric'), type = 'bar') %>% 
         hc_xAxis(title = list(text = '')) %>% 
         hc_yAxis(title = list(text = ''), max = 1) %>% 
         hc_add_theme(hc_theme_rcharlie)
@@ -187,7 +187,7 @@ artist_quadrant_chart <- function(track_df) {
                                 '<br><b>Valence:</b> ', valence,
                                 '<br><b>Energy:</b> ', energy)) %>% 
         ungroup %>% 
-        hchart(hcaes(x = valence, y = energy, group = album_name), type = 'scatter') %>% 
+        hchart(hcaes(x = 'valence', y = 'energy', group = 'album_name'), type = 'scatter') %>% 
         hc_tooltip(formatter = JS(paste0("function() {return this.point.tooltip;}")), useHTML = T) %>%
         hc_yAxis(max = 1, min = 0, title = list(text = 'Energy')) %>%
         hc_xAxis(max = 1, min = 0, title = list(text = 'Valence')) %>%
@@ -257,7 +257,7 @@ sentiment_profile_chart <- function(track_df, group_var_str) {
     all_profiles <- rbind(user_profile, group_var_profiles)
     
     all_profiles %>% 
-        hchart(hcaes(x = group_var, y = pct, group = sentiment), type = 'bar') %>% 
+        hchart(hcaes(x = 'group_var', y = 'pct', group = 'sentiment'), type = 'bar') %>% 
         hc_add_theme(hc_theme_rcharlie) %>% 
         hc_xAxis(title = list(text = '')) %>% 
         hc_colors(c('red', 'green', 'lightblue', 'blue'))
