@@ -234,7 +234,7 @@ withBusyIndicatorServer <- function(buttonId, expr) {
         shinyjs::enable(buttonId)
         shinyjs::hide(selector = loadingEl)
     })
-
+    
     # Try to run the code when the button is clicked and show an error message if
     # an error occurs or a success message if it completes
     tryCatch({
@@ -280,7 +280,7 @@ hc_add_event_point <- function(hc, series = "series", event = "click"){
                   
                   if (typeof Shiny != 'undefined') { Shiny.onInputChange(this.series.chart.renderTo.id + '_' + '", event, "', pointinfo); }
 }")
-
+    
     fun <- JS(fun)
     
     eventobj <- structure(
@@ -304,7 +304,7 @@ hc_add_event_point <- function(hc, series = "series", event = "click"){
     
     hc
     
-    }
+}
 
 hc_add_event_series <- function(hc, series = "series", event = "click"){
     
@@ -315,27 +315,27 @@ hc_add_event_series <- function(hc, series = "series", event = "click"){
                   if (typeof Shiny != 'undefined') { Shiny.onInputChange(this.chart.renderTo.id + '_' + '", event, "', seriesinfo); }
                   
 }")
-  fun <- JS(fun)
-  
-  eventobj <- structure(
-      list(structure(
-          list(structure(
-              list(fun),
-              .Names = event)
-          ),
-          .Names = "events")
-      ),
-      .Names = series
-  )
-  
-  hc$x$hc_opts$plotOptions <- rlist::list.merge(
-      hc$x$hc_opts$plotOptions,
-      eventobj
-  )
-  
-  hc
-  
-  }
+    fun <- JS(fun)
+    
+    eventobj <- structure(
+        list(structure(
+            list(structure(
+                list(fun),
+                .Names = event)
+            ),
+            .Names = "events")
+        ),
+        .Names = series
+    )
+    
+    hc$x$hc_opts$plotOptions <- rlist::list.merge(
+        hc$x$hc_opts$plotOptions,
+        eventobj
+    )
+    
+    hc
+    
+}
 
 hc_elementId <- function(hc, id = NULL) {
     
@@ -397,8 +397,8 @@ hc_size <- function(hc, width = NULL, height = NULL) {
                 
                 return tooltip.defaultFormatter.call(this, tooltip);
 }"))
-
-    }
+    
+}
 
 tooltip_chart <- function(
     accesor = NULL,
@@ -459,7 +459,7 @@ tooltip_chart <- function(
     return '<div id=\"tooltipchart-{{id}}\" style=\"width: {{w}}px; height: {{h}}px;\"></div>';
     
 }"
-  # cat(jss)
+    # cat(jss)
     
     jsss <- whisker.render(
         jss,
