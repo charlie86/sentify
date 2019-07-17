@@ -6,7 +6,8 @@ shinyServer(function(input, output, session) {
     
     artist_info <- reactive({
         req(input$artist_search != '')
-        search_spotify(input$artist_search, 'artist', authorization = spotify_access_token())
+        search_spotify(input$artist_search, 'artist', authorization = spotify_access_token()) %>% 
+            filter(!duplicated(name))
     })
     
     observeEvent(input$artist_search, {
@@ -28,11 +29,18 @@ shinyServer(function(input, output, session) {
         )
     })
     
+    selected_artist <- reactive({
+        req(nrow(artist_info()) > 0)
+        artist_info() %>% 
+            filter(name == input$select_artist) %>% 
+            filter(popularity == max(popularity))
+    })
+    
     observeEvent(input$select_artist, {
         
         req(nrow(artist_info()) > 0)
         
-        artist_img <- ifelse(!is.na(artist_info()$images[[1]]$url[1][artist_info()$name == input$select_artist]), artist_info()$images[[1]]$url[1][artist_info()$name == input$select_artist], 'https://pbs.twimg.com/profile_images/509949472139669504/IQSh7By1_400x400.jpeg')
+        artist_img <- ifelse(!is.na(selected_artist()$images[[1]]$url[1]), selected_artist()$images[[1]]$url[1], 'https://pbs.twimg.com/profile_images/509949472139669504/IQSh7By1_400x400.jpeg')
         
         output$artist_img <- renderText({
             HTML(str_glue('<img src={artist_img} height="200">'))
@@ -41,7 +49,7 @@ shinyServer(function(input, output, session) {
     })
     
     artist_audio_features <- eventReactive(input$tracks_go, {
-        df <- get_artist_audio_features(artist_info()$name[artist_info()$name == input$select_artist], authorization = spotify_access_token()) %>% 
+        df <- get_artist_audio_features(selected_artist()$name, authorization = spotify_access_token()) %>% 
             mutate(album_img = map_chr(1:nrow(.), function(row) {
                 .$album_images[[row]]$url[1]
             }))
